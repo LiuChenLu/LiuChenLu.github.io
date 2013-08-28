@@ -21,20 +21,7 @@
 
 /*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
 
-@media only screen and (max-width: 480px) {
-	.span_4_of_4 {
-		width: 100%; 
-	} 
-	.span_3_of_4 {
-		width: 100%; 
-	} 
-	.span_2_of_4 {
-		width: 100%; 
-	}
-	.span_1_of_4 {
-		width: 100%; 
-	}
-}
+
 @media only screen and (max-width: 960px) {
 	.span_4_of_4 {
 		width: 100%; 
@@ -47,5 +34,20 @@
 	}
 	.span_1_of_4 {
 		width: 45.2%; 
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	.span_4_of_4 {
+		width: 100%; 
+	} 
+	.span_3_of_4 {
+		width: 100%; 
+	} 
+	.span_2_of_4 {
+		width: 100%; 
+	}
+	.span_1_of_4 {
+		width: 100%; 
 	}
 }
