@@ -1,0 +1,123 @@
+#!/bin/bash
+#########################################################################################
+#
+# Liu Chen Lu
+#
+# ann 
+#	fetch and display announcements from the CS246 website 
+#	(http://www.student.cs.uwaterloo.ca/~cs246/index.shtml)
+#
+#	assumed that each announcement on the CS246 website is posted within an HTML <li>
+#	tag and starts with a posting date, which is surrounded by an HTML <b> tag. You 
+#	assumed that the announcements are placed on separate lines, and that each
+#	announcement occupies exactly one line. For each announcement, print the date 
+#	and the announcement body in one line, separated by a '-'. 
+#	
+#		./ann [-o k | -n k]
+#	
+#	-o k : specifies that the oldest k announcements should be printed,
+#	-n k : specifies that the newest k announcements should be printed,
+#	if no option is provided, then the newest 3 messages should be printed.
+#	
+#########################################################################################
+	
+# fetch the announcements silently
+wget http://www.student.cs.uwaterloo.ca/~Cs246/index.shtml 1>/dev/null 2>/dev/null
+
+printnew3(){
+echo Here are the 3 newest announcements:;
+	# print announcements as if the -o command has not been typed
+	egrep '<li><b>.+</b>.+</li>' index.shtml | sed 's_<b>_ _' | sed 's_</b>_-_' | sed  's_<li>\(.*\)</li>_\1_'| head --lines=3;
+	rm index.shtml*
+}
+
+# if there are two commands entered, then ann was passed a flag
+if (test $# -eq 2) ; then
+
+	# if it is asked to print the oldest k announcements
+	if (test $1 = -o) ; then
+		# check if the next arguement is an interger
+		if ! [[ $2 =~ ^[0-9]+([0-9]+)?$ ]] ; then 
+			echo An interger must follow -o>&2; 
+			printnew3;
+			exit 1;
+		fi
+		
+		egrep '<li><b>.+</b>.+</li>' index.shtml | sed 's_<b>_ _' | sed 's_</b>_-_' | sed  's_<li>\(.*\)</li>_\1_' | tail -${2};
+		rm index.shtml*
+		exit 0;
+	fi
+
+	if (test $1 = -n) ; then
+		if ! [[ $2 =~ ^[0-9]+([0-9]+)?$ ]] ; then
+			echo An interger must follow -n>&2;
+			printnew3;
+			exit 1;
+		fi
+		egrep '<li><b>.+</b>.+</li>' index.shtml | sed 's_<b>_ _' | sed 's_</b>_-_' | sed  's_<li>\(.*\)</li>_\1_' | head --lines=${2};
+		rm index.shtml*
+		exit 0;
+	fi
+
+fi
+
+printnew3;
+
+rm index.shtml*
+
+##############################################################################
+:<<'END'
+test 1: check nothing is left as garbage
+~/cs246/a01$ ls > before
+~/cs246/a01$ ls> after
+~/cs246/a01$ ls> before
+~/cs246/a01$ ./ann
+     Friday 25 May: - <a href="http://www.student.cs.uwaterloo.ca/~cs246/current/assignments/a2/index.shtml">Assignment 2</a> has been posted. 
+	 Monday 14 May: - <a href="http://www.student.cs.uwaterloo.ca/~cs246/current/assignments/a1/index.shtml">Assignment 1</a> has been posted. 
+	 Thursday 10 May: - The deadline for the early bonus for A0 has been extended to 10pm on Thursday, May 10. More details are on <a href="http://piazza.com/class#spring2012/cs246/98">Piazza</a>.
+~/cs246/a01$ ls> after
+~/cs246/a01$ diff before after
+
+test 2: check the first 4 announcements
+~/cs246/a01$ ls >before
+~/cs246/a01$ ./ann -o 4
+	 Friday 4 May: - <a href="http://www.student.cs.uwaterloo.ca/~cs246/current/people.shtml">Office hours</a> have been posted. 
+     Wednesday 2 May:- <a href="http://www.student.cs.uwaterloo.ca/~cs246/current/assignments/a0/">Assignment 0</a> has been posted.
+ Wednesday 3 August:- Assignment 5 marks are posted online, make sure to verify that you have the correct mark and the same mark as your partner.
+ Tuesday 2 August:- A reminder that remark requests for Assignments 4 and 5 are due on Wednesday August 10th.
+~/cs246/a01$ ls>after
+~/cs246/a01$ diff before after
+
+test 3: check the last 4 announcements
+~/cs246/a01$ ./ann -n 4
+     Friday 25 May: - <a href="http://www.student.cs.uwaterloo.ca/~cs246/current/assignments/a2/index.shtml">Assignment 2</a> has been posted. 
+	 Monday 14 May: - <a href="http://www.student.cs.uwaterloo.ca/~cs246/current/assignments/a1/index.shtml">Assignment 1</a> has been posted. 
+	 Thursday 10 May: - The deadline for the early bonus for A0 has been extended to 10pm on Thursday, May 10. More details are on <a href="http://piazza.com/class#spring2012/cs246/98">Piazza</a>.
+	 Friday 4 May: - <a href="http://www.student.cs.uwaterloo.ca/~cs246/current/people.shtml">Office hours</a> have been posted. 
+~/cs246/a01$ ls>after
+~/cs246/a01$ diff before after
+
+test 4: check last 10 announcements
+~/cs246/a01$ ./ann -n 10
+     Friday 25 May: - <a href="http://www.student.cs.uwaterloo.ca/~cs246/current/assignments/a2/index.shtml">Assignment 2</a> has been posted. 
+	 Monday 14 May: - <a href="http://www.student.cs.uwaterloo.ca/~cs246/current/assignments/a1/index.shtml">Assignment 1</a> has been posted. 
+	 Thursday 10 May: - The deadline for the early bonus for A0 has been extended to 10pm on Thursday, May 10. More details are on <a href="http://piazza.com/class#spring2012/cs246/98">Piazza</a>.
+	 Friday 4 May: - <a href="http://www.student.cs.uwaterloo.ca/~cs246/current/people.shtml">Office hours</a> have been posted. 
+     Wednesday 2 May:- <a href="http://www.student.cs.uwaterloo.ca/~cs246/current/assignments/a0/">Assignment 0</a> has been posted.
+ Wednesday 3 August:- Assignment 5 marks are posted online, make sure to verify that you have the correct mark and the same mark as your partner.
+ Tuesday 2 August:- A reminder that remark requests for Assignments 4 and 5 are due on Wednesday August 10th.
+~/cs246/a01$ ls>after
+~/cs246/a01$ diff before after
+
+test 5: check first 10 announcements
+~/cs246/a01$ ./ann -o 10
+     Friday 25 May: - <a href="http://www.student.cs.uwaterloo.ca/~cs246/current/assignments/a2/index.shtml">Assignment 2</a> has been posted. 
+	 Monday 14 May: - <a href="http://www.student.cs.uwaterloo.ca/~cs246/current/assignments/a1/index.shtml">Assignment 1</a> has been posted. 
+	 Thursday 10 May: - The deadline for the early bonus for A0 has been extended to 10pm on Thursday, May 10. More details are on <a href="http://piazza.com/class#spring2012/cs246/98">Piazza</a>.
+	 Friday 4 May: - <a href="http://www.student.cs.uwaterloo.ca/~cs246/current/people.shtml">Office hours</a> have been posted. 
+     Wednesday 2 May:- <a href="http://www.student.cs.uwaterloo.ca/~cs246/current/assignments/a0/">Assignment 0</a> has been posted.
+ Wednesday 3 August:- Assignment 5 marks are posted online, make sure to verify that you have the correct mark and the same mark as your partner.
+ Tuesday 2 August:- A reminder that remark requests for Assignments 4 and 5 are due on Wednesday August 10th.
+~/cs246/a01$ ls>after
+~/cs246/a01$ diff before after
+END

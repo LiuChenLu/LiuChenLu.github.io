@@ -124,17 +124,17 @@ a:hover {
  */
 
 h1 {
-    font-size: 2em;
+    font-size: 1.5em;
     margin: 0.67em 0;
 }
 
 h2 {
-    font-size: 1.5em;
+    font-size: 1.17em;
     margin: 0.83em 0;
 }
 
 h3 {
-    font-size: 1.17em;
+    font-size: 1em;
     margin: 1em 0;
 }
 
@@ -246,7 +246,7 @@ q:after {
  */
 
 small {
-    font-size: 80%;
+    font-size: 70%;
 }
 
 /*
@@ -388,7 +388,7 @@ button,
 input,
 select,
 textarea {
-    font-size: 100%; /* 1 */
+    font-size: 90%; /* 1 */
     margin: 0; /* 2 */
     vertical-align: baseline; /* 3 */
     *vertical-align: middle; /* 3 */

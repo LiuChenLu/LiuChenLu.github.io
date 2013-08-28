@@ -1,0 +1,414 @@
+#for!bin/bash
+
+#########################################################################################
+#
+# Liu Chen Lu
+#
+# runSuite
+#	A formal test suite and tool to automate testing to rerun old tests on new code
+#	to check that existing bugs have been fixed, and to ensure that no new bugs have 
+#	been introduced. 
+#
+#	runSuite script runs program on each test in the test suite and reports on any
+#	tests whose output does not match the expected output. The file suite-file
+#	contains a list of stems, from which we construct the names of files containing
+#	the input and expected output of each test. 
+#
+#		./runSuite [-q|--quiet] suite-file program
+#
+#	The argument suite-file is the name of a file containing a list of filename stems
+#	(more details below), and the argument program is the name of the program to be 
+#	run. - q or --quiet are optional parameter that runs your script in a quiet mode.
+#
+#	The code will return errors for
+#		-Incorrect number of command line arguments. Exit status 1.
+#		-Missing or unreadable .in or .out files. For example, the suite-file 
+#		 contains an entry xxx, but either xxx.in or xxx.out doesn't exist or is
+#		 unreadable. Exit status 2.
+#
+#	Example implimentations for the code can be found in tests at the end of this page
+#
+#########################################################################################
+
+if (test $# -ne 3) && (test $# -ne 2); then
+                echo './runSuite [-q|--quiet] suite-file program' >&2
+                exit 1
+        fi
+
+if (test $# -eq 3) && ((test $1 = -q) || (test $1 = --quiet)); then
+
+	#renaming variables so that it is easier to understand the code
+	suite=${2}
+	prg=${3}
+
+	#run each of the tests in suit
+	for tick in `cat ${suite}`; do
+        	#set up temp files where the actual output from the file is stored
+	        aout="$(mktemp)"
+
+		# if either the input file or the output file does not
+		# exist, display error
+		if (! test -r ${tick}.in) || (! test -r ${tick}.out); then
+               		 echo missing or unreadable input or output file for ${tick} >&2
+            		 exit 2
+	        fi
+	
+	        ${prg}  < ${tick}.in > ${aout}
+	        cmp -s ${aout} ${tick}.out
+	        #if the two files are not exactly the same
+	        if (test ${?} -ne  0); then
+	                echo Test failed: ${tick}
+	        fi
+
+	        #remove the aout
+	        rm $aout
+	done
+
+	exit 0
+fi
+
+if (test $# -eq 2); then
+	#renaming variables so that it is easier to understand the code
+	suite=${1}
+	prg=${2}
+
+	#run each of the tests in suit
+	for tick in `cat ${suite}`; do
+		#set up temp files where the actual output from the file is stored
+		aout="$(mktemp)"
+
+	 # if either the input file or the output file does not exist, display error
+		if (! test -r ${tick}.in) || (! test -r ${tick}.out); then
+			echo missing or unreadable input or output file for ${tick} >&2
+			exit 2
+		fi
+
+		${prg}  < ${tick}.in > ${aout}
+		cmp -s ${aout} ${tick}.out
+		#if the two files are not exactly the same
+		if (test ${?} -ne  0); then
+			echo Test failed: ${tick}
+			echo Input:
+			cat ${tick}.in
+			echo Expected:
+			cat ${tick}.out
+			echo Actual:
+			cat ${aout}
+		fi
+
+		#remove the aout
+		rm $aout
+	done
+
+	exit 1
+fi
+
+# when the file's input variables is not correct
+echo './runSuite [-q|--quiet] suite-file program' >&2
+exit 1
+
+
+# better tests
+#########################################################################
+:<<'END'
+**when tests pass
+~/cs246/a01/runSuite_file$ cat program
+read d
+eval ls $d
+~/cs246/a01/runSuite_file$ cat suite
+test
+test2
+~/cs246/a01/runSuite_file$ cat cat test.in
+cat: cat: No such file or directory
+.
+~/cs246/a01/runSuite_file$ cat test.out
+program
+runSuite
+suite
+test2.in
+test2.out
+test.in
+test.out
+~/cs246/a01/runSuite_file$ cat test2.in
+~
+~/cs246/a01/runSuite_file$ cat test2.out
+bin
+constants.rkt
+constants.rkt~
+cs115
+cs135
+cs136
+cs136VMBackups
+cs246
+cs251
+d
+Desktop
+Documents
+Downloads
+etc
+Library
+Music
+NexusAppData
+NexusDesktop
+NexusMyDocuments
+Pictures
+Public
+public_html
+scratch
+Templates
+Videos
+Windows2000
+windows2000
+Windows2000.V2
+~/cs246/a01/runSuite_file$ ./runSuite suite ./program
+~/cs246/a01/runSuite_file$ ./runSuite -q suite ./program
+~/cs246/a01/runSuite_file$ ./runSuite -stupidcommand suite ./program
+./runSuite [-q|--quiet] suite-file program
+
+**when one of the tests fail
+# content of test.out is changed to you fail 
+Test failed: test
+Input:
+.
+Expected:
+you fail
+Actual:
+program
+runSuite
+suite
+test2.in
+test2.out
+test.in
+test.out
+~/cs246/a01/runSuite_file$ ./runSuite -q suite ./program
+Test failed: test
+~/cs246/a01/runSuite_file$ ./runSuite -quiet suite ./program
+./runSuite [-q|--quiet] suite-file program
+
+
+**when more than one test fail
+# content of test2.out is changed to 'wow you fail more than i thought you would'
+~/cs246/a01/runSuite_file$ ./runSuite suite ./program
+Test failed: test
+Input:
+.
+Expected:
+you fail
+Actual:
+program
+runSuite
+suite
+test2.in
+test2.out
+test.in
+test.out
+Test failed: test2
+Input:
+~
+Expected:
+wow you fail more than i thought you would
+Actual:
+bin
+constants.rkt
+constants.rkt~
+cs115
+cs135
+cs136
+cs136VMBackups
+cs246
+cs251
+d
+Desktop
+Documents
+Downloads
+etc
+Library
+Music
+NexusAppData
+NexusDesktop
+NexusMyDocuments
+Pictures
+Public
+public_html
+scratch
+Templates
+Videos
+Windows2000
+windows2000
+Windows2000.V2
+
+~/cs246/a01/runSuite_file$ ./runSuite -q suite ./program
+Test failed: test
+Test failed: test2
+
+runSuite_file$ ./runSuite --quiet suite ./program
+Test failed: test
+Test failed: test2
+
+
+**when more than expected arguements are passed to runSuite
+./runSuite --quiet suite ./program turkeys
+./runSuite [-q|--quiet] suite-file program
+
+./runSuite -q suite ./program dolphin
+./runSuite [-q|--quiet] suite-file program
+
+./runSuite suite ./program otters
+./runSuite [-q|--quiet] suite-file program
+
+
+**when less than expected arguemtns are passed to runSuite
+~/cs246/a01/runSuite_file$ ./runSuite -q suite
+./runSuite [-q|--quiet] suite-file program
+~/cs246/a01/runSuite_file$ echo $?
+1
+
+~/cs246/a01/runSuite_file$ ./runSuite --quiet suite
+./runSuite [-q|--quiet] suite-file program
+~/cs246/a01/runSuite_file$ echo $?
+1
+
+~/cs246/a01/runSuite_file$ ./runSuite iamawesome
+./runSuite [-q|--quiet] suite-file program
+~/cs246/a01/runSuite_file$ echo $?
+1
+
+~/cs246/a01/runSuite_file$ ./runSuite
+./runSuite [-q|--quiet] suite-file program
+~/cs246/a01/runSuite_file$ echo $?
+1
+
+**when one of the input/input files does not exist
+~/cs246/a01/runSuite_file$ rm test2.out
+~/cs246/a01/runSuite_file$ cat test.out
+you fail
+~/cs246/a01/runSuite_file$ ls . > test.out
+~/cs246/a01/runSuite_file$ ./runSuite suite ./program
+missing or unreadable input or output file for test2
+~/cs246/a01/runSuite_file$ echo $?
+2
+./runSuite -q suite ./program
+missing or unreadable input or output file for test2
+~/cs246/a01/runSuite_file$ echo $?
+2
+
+
+**when one of the test is missing input and output files
+~/cs246/a01/runSuite_file$ rm test2.in
+
+~/cs246/a01/runSuite_file$ ./runSuite suite ./program
+Test failed: test
+Input:
+.
+Expected:
+program
+runSuite
+suite
+test2.in
+test.in
+test.out
+Actual:
+program
+runSuite
+suite
+test.in
+test.out
+missing or unreadable input or output file for test2
+~/cs246/a01/runSuite_file$ echo $?
+2
+~/cs246/a01/runSuite_file$ ls > test.out
+~/cs246/a01/runSuite_file$ ./runSuite suite ./program
+missing or unreadable input or output file for test2
+~/cs246/a01/runSuite_file$ ./runSuite -a suite ./program
+./runSuite [-q|--quiet] suite-file program
+
+~/cs246/a01/runSuite_file$ cat suite
+test2
+test
+~/cs246/a01/runSuite_file$ ./runSuite suite ./program
+missing or unreadable input or output file for test2
+~/cs246/a01/runSuite_file$ ./runSuite -q suite ./program
+missing or unreadable input or output file for test2
+~/cs246/a01/runSuite_file$ echo $?
+2
+ 
+END
+#########################################################################
+
+#tests
+# cat program
+#>ls $1
+# cat suite
+# >test
+# cat test.in
+#>.
+# cat test.out
+#>a1p1a.txt
+#>a1p1b.txt
+#>a1p1c.txt
+#>a1p1d.txt
+#>a1p2a.txt
+#>a1p2b.txt
+#>a1p2c.txt
+#>a1p2d.txt
+#>a1p2e.txt
+#>a1p2f.txt
+#>a1p2g.txt
+#>program
+#>runSuite
+#>suite
+#>swap
+#>temp
+#>temp.txt
+#>test.in
+#>test.out
+#>test.txt
+
+#./runSuite suite ./program
+#>
+
+#test 2:
+#~/cs246/a01$ ./runSuite suite ./program
+#~/cs246/a01$ ./runSuite suite
+#./runSuite suite-file program
+#~/cs246/a01$ ./runSuite
+#./runSuite suite-file program
+#~/cs246/a01$ ./runSuite program program program
+#./runSuite suite-file program
+
+#test 3
+#~/cs246/a01$ cat suite
+#test
+#test2
+#~/cs246/a01$ cat test.in
+#.
+#~/cs246/a01$ cat test.out
+#a1p1a.txt
+#a1p1b.txt
+#a1p1c.txt
+#a1p1d.txt
+#a1p2a.txt
+#a1p2b.txt
+#a1p2c.txt
+#a1p2d.txt
+#a1p2e.txt
+#a1p2f.txt
+#a1p2g.txt
+#program
+#runSuite
+#suite
+#swap
+#temp
+#temp.txt
+#test2.in
+#test.in
+#test.out
+#test.txt
+#~/cs246/a01$ cat test2.in
+#~
+#~/cs246/a01$ cat test2.out
+#cat: test2.out: No such file or directory
+#~/cs246/a01$ cat program
+#ls $1
+#~/cs246/a01$ ./runSuite suite ./program
+#missing or unreadable input or output file for test2
