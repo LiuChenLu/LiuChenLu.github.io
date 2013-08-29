@@ -104,12 +104,12 @@ textarea {
 	width: 100%;
 }
 
-.site-header, .about-me, .from-my-blog {
+.site-header, .about-me, .sidebyside, .from-my-blog {
 	width: 75%;
 }
 
 @media all and (min-width:601px) and (max-width:1020px) {
-	.site-header, .about-me, .from-my-blog {
+	.site-header, .about-me, .sidebyside, .from-my-blog {
 		width: 82%;
 	}
 }
@@ -398,6 +398,49 @@ nav li:hover {
 	}
 }
 
+/* my own
+ */
+
+.sidebyside {
+	min-width: 280px;
+	max-width: 900px;
+	margin: 37px auto 45px;
+}
+
+.side2 {
+	display: inline-block;
+	width: 47%;
+	margin: 0 0 0 4%;
+	vertical-align: top;
+}
+
+.sidebyside .sidebyside-about {
+	width: 47%;
+	display: inline-block;
+}
+
+.sidebyside-square .sidebyside .sidebyside-about {
+	width: 47%;
+	display: inline-block;
+}
+
+.sidebyside-square .side2 {
+	display: inline-block;
+	width: 47%;
+	margin: 0 0 0 3%;
+}
+
+@media all and (max-width:800px) {
+
+	.sidebyside-square .sidebyside .sidebyside-about, .sidebyside .sidebyside-about {
+		width: 100%;
+		margin: 0 0 27px 0;
+	}
+	.sidebyside-square .sidebyside .side2, .sidebyside .side2 {
+		width: 100%;
+		margin: 0 0 27px 0;
+	}
+}
 
 /* ==========================================================================
    Blog & Single post

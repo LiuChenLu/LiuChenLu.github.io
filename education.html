@@ -17,7 +17,10 @@
 		<link rel="stylesheet" href="css/color-schemes/light/hot-pink.css">
 		<link rel="stylesheet" href="css/typography.css">
 		<link rel="stylesheet" href="css/font-awesome.css">
-		<link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/html5reset.css" media="all">
+        <link rel="stylesheet" href="css/col.css" media="all">
+    	<link rel="stylesheet" href="css/4cols.css" media="all">
 
 		<script>
 			document.cookie='resolution='+Math.max(screen.width,screen.height)+("devicePixelRatio" in window ? ","+devicePixelRatio : ",1")+'; path=/';
@@ -29,7 +32,8 @@
 		<![endif]-->
 
 		<!-- Add your site or application content here -->
-		<nav>
+        		<div class="home"><a href="index.html#blog"><i class="icon-home"></i></a></div>
+        <nav>
 			<div class="top-ribbon"></div>
 			<ul class="nav-font clearfix">
                 <li><a href="projects.html"><font size="6">Projects</font></a></li>
@@ -42,96 +46,29 @@
 		</nav>
 		<div class="sparator"></div>
 
-		<header class="site-header">
-			<h1 class="title title-font">Liu Chen Lu</h1>
-			<p class="tagline tagline-font">
-            Third year Computer Science (University of Waterloo) 
-            and Business Administration (Wilfrid Laurier University) 
-            Double Degree student.
-			</p>
-		</header>
 
-		<div class="sparator"></div>
-		<section class="works-hex">
+		<article class="post two-column">
+			<header>
+				<h1 class="entry-title-font">Education</h1>
+			</header>
 
-			<a href="projects.html" class="category category-1">
-				<div class="wrapper"><!--A helper to keep the hexagon's aspect ratio-->
-					<div class="hexagon">
-						<div class="hexagon-in1">
-							<div class="hexagon-in2">
-								<img class="thumbnail" src="img/01.jpg" alt="thumbnail">
-							</div><!--hexagon-in2-->
-						</div><!--hexagon-in1-->
-					</div><!--hexagon-->
-				</div><!--wrapper-->
-                <div class="category-name"><h2 class="works-font">Projects</h2></div>
-			</a><!--category-1-->
+			<div class="content">
 
-			<a href="workExperience.html"  class="category category-2">
-				<div class="wrapper">
-					<div class="hexagon">
-						<div class="hexagon-in1">
-							<div class="hexagon-in2">
-								<img class="thumbnail" src="img/02.jpg" alt="thumbnail">
-							</div><!--hexagon-in2-->
-						</div><!--hexagon-in1-->
-					</div><!--hexagon-->
-				</div><!--wrapper-->
-                <div class="category-name"><h2 class="works-font">Work Experience</h2></div>
-			</a><!--category-2-->
+				<h2>University of Waterloo</h2>
+                <a href="transcripts/LiuChenLuUWTranscript.pdf">Transcript</a>
+                <p>SEPT 2011 - AUG 2016<br>
+                   Computer Science; 88% cummulative average (3.9 GPA)</p>
 
-			<a href="gallery-hex.html"  class="category category-3">
-				<div class="wrapper">
-					<div class="hexagon">
-						<div class="hexagon-in1">
-							<div class="hexagon-in2">
-								<img class="thumbnail" src="img/03.jpg" alt="thumbnail">
-							</div><!--hexagon-in2-->
-						</div><!--hexagon-in1-->
-					</div><!--hexagon-->
-				</div><!--wrapper-->
-                <div class="category-name"><h2 class="works-font">Education &amp; Awards</h2></div>
-			</a><!--category-3-->
+                <div></div>
 
-	
-
-			<a href="gallery-hex.html"  class="category category-4">
-				<div class="wrapper">
-					<div class="hexagon">
-						<div class="hexagon-in1">
-							<div class="hexagon-in2">
-								<img class="thumbnail" src="img/extracurricular.jpg" alt="thumbnail">
-							</div><!--hexagon-in2-->
-						</div><!--hexagon-in1-->
-					</div><!--hexagon-->
-				</div><!--wrapper-->
-                <div class="category-name"><h2 class="works-font">Extracurricular</h2></div>
-			</a><!--category-4-->
-
-			<a href="LiuChenLuResume.pdf"  class="category category-5">
-				<div class="wrapper">
-					<div class="hexagon">
-						<div class="hexagon-in1">
-							<div class="hexagon-in2">
-								<img class="thumbnail" src="img/resume.jpg" alt="thumbnail">
-							</div><!--hexagon-in2-->
-						</div><!--hexagon-in1-->
-					</div><!--hexagon-->
-				</div><!--wrapper-->
-                <div class="category-name"><h2 class="works-font">Resume</h2></div>
-			</a><!--category-5-->
-
-		</section><!--works-->
-		<div class="sparator"></div>
-
-		<section class="about-me">
-			<article class="about about-font">
+                <section class="sidebyside">
+			<article class="sidebyside-about sidebyside-about-font">
             <p>My name is Liu Chen and I am a Canadian university student. Welcome to my online porfolio. I enjoy programming at school and in my spare time. I especially love playing with artificial intelligence and machine learning in my spare time.</p>
             <p>Please take a look around my portfolio. You can find my resume, my projects, my education, awards I've recieved, and my extracurricular acedemic activities.</p> 
             <p>I have some awesome programming projects on <a href="http://www.github.com/LiuChenLu">Github <i class="icon-github"></i></a> and some older projects on my <a href="https://sites.google.com/site/liuchenhelenlu/projects">old portfolio site <i class="icon-briefcase"></i></a>.</p>
 				<p>If you like what you see and would like me to work as an intern for you, you can <a href="mailto:lclu@uwaterloo.ca">e-mail <i class="icon-envelope-alt"></i></a> me or call <a href="tel:5195917178">519-591-7178 <i class="icon-phone"></i></a>.</p>
 			</article><!--text-->
-			<article class="twitter-stream">
+			<article class="side2">
             <header>
             <p><a href="mailto:lclu@uwaterloo.ca">e-mail <i class="icon-envelope-alt"></i></a></p>
             <p><a href="tel:5195917178">519-591-7178 <i class="icon-phone"></i></a></p>
@@ -139,15 +76,28 @@
                Waterloo, Ontario, Canada</p>
             </header>
 				<div class="tweets meta-info-font"></div>
-			</article><!--twitter-stream-->
-		</section><!--about-me-->
+			</article><!--side2-->
+		</section><!--sidebyside-->
+
+				
+			</div><!--content-->
+
+			<footer>
+				<p class="meta-info-font"><a class="js-tweet" href="#">Tweet me <i class="icon-twitter"></i></a> to let me know what you think</p>
+				<p class="meta-info-font prev-next">
+					<a href="">&lArr; At Day's End</a> // <a href="">Another Post &rArr;</a>
+				</p>
+			</footer>
+		</article>
+
 
 		<footer class="site-footer site-footer-font">
 			<div class="sparator"></div>
 			<div class="contact">
-				<a href="mailto:lclu@uwaterloo.ca"><i class="icon-envelope-alt"></i> lclu@uwaterloo.ca</a> &middot;
-				<a href="tel:5195917178"><i class="icon-phone"></i> 519-746-7178</a> &middot;
-				<a href="http://www.github.com/LiuChenLu"><i class="icon-github"></i> Github repository</a> 
+				<a href="mailto:hexocat.themes@gmail.com"><i class="icon-envelope-alt"></i> hexocat.themes@gmail.com</a> &middot;
+				<a href="tel:4213-45-710"><i class="icon-phone"></i> 4213-45-710</a> &middot;
+				<a href="http://www.twitter.com"><i class="icon-twitter"></i> @Mori</a> &middot;
+				<a href="http://www.facebook.com"><i class="icon-facebook-sign"></i> /mori.h</a>
 			</div>
 			<div class="copyright">Template Copyright &#64; 2012 My Story. Made by <a href="#">Hexocat</a> with <i class="icon-heart"></i></div>
 		</footer>
