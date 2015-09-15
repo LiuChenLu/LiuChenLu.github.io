@@ -59,6 +59,7 @@
 /* Grid */
 
 	.row {
+		text-align: center;
 		border-bottom: solid 1px transparent;
 		-moz-box-sizing: border-box;
 		-webkit-box-sizing: border-box;
@@ -1005,11 +1006,16 @@
 				background-color: #999999;
 			}
 
+/* Box */
+	.box.contact {
+		text-align: center;
+	}
+
 /* List */
 
 	ul.default {
 		list-style: disc;
-		padding-left: 1em;
+		padding-left: 2em;
 	}
 
 		ul.default li {
@@ -1024,6 +1030,57 @@
 		ul.actions li:first-child {
 			margin-left: 0;
 		}
+
+	ul.special {
+		cursor: default;
+	}
+
+		ul.special li {
+			-moz-transition: top .15s ease-in-out;
+			-webkit-transition: top .15s ease-in-out;
+			-ms-transition: top .15s ease-in-out;
+			transition: top .15s ease-in-out;
+			position: relative;
+			display: inline-block;
+			margin: 0 1.5em 0 1.5em;
+			top: 0;
+		}
+
+			ul.special li:hover {
+				top: -10px;
+			}
+
+				ul.special li:hover a {
+					background: #A8A8A8 ;
+				}
+
+		ul.special a {
+			-moz-transition: background-color .2s ease-in-out;
+			-webkit-transition: background-color .2s ease-in-out;
+			-ms-transition: background-color .2s ease-in-out;
+			transition: background-color .2s ease-in-out;
+			display: block;
+			position: relative;
+			background: #D0D0D0;
+			width: 8em;
+			height: 8em;
+			border-radius: 3em;
+			outline: 0;
+		}
+
+			ul.special a:before {
+				position: absolute;
+				width: 128px;
+				height: 128px;
+				font-size: 48px;
+				line-height: 128px;
+				left: 50%;
+				top: 50%;
+				margin-top: -64px;
+				margin-left: -64px;
+				color: #fff;
+				text-align: center;
+			}
 
 	ol.default {
 		list-style: decimal;
