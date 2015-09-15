@@ -753,7 +753,7 @@
 		background-size: auto, 100% 100%;
 		font-family: 'Source Sans Pro', sans-serif;
 		font-weight: 300;
-		color: #777777;
+		color: #424242;
 	}
 
 		body.is-loading *, body.is-loading *:before, body.is-loading *:after {
@@ -1051,7 +1051,7 @@
 			}
 
 				ul.special li:hover a {
-					background: #A8A8A8 ;
+					background: #6E6E6E ;
 				}
 
 		ul.special a {
@@ -1061,10 +1061,9 @@
 			transition: background-color .2s ease-in-out;
 			display: block;
 			position: relative;
-			background: #D0D0D0;
+			background: #424242;
 			width: 8em;
 			height: 8em;
-			border-radius: 3em;
 			outline: 0;
 		}
 
