@@ -26,10 +26,6 @@
 		line-height: 1;
 	}
 
-	ol, ul {
-		list-style: none;
-	}
-
 	blockquote, q {
 		quotes: none;
 	}
@@ -811,7 +807,7 @@
 		clear: both;
 	}
 
-	p, ul, ol, dl, table, blockquote, form {
+	dl, table, blockquote, form {
 		margin-bottom: 2em;
 	}
 
@@ -1013,26 +1009,12 @@
 
 /* List */
 
-	ul.default {
-		list-style: disc;
-		padding-left: 2em;
+	ul, ol  {
+	 padding-left: 30px;
 	}
-
-		ul.default li {
-			padding-left: 0.5em;
-		}
-
-	ul.actions li {
-		display: inline-block;
-		margin-left: 0.5em;
-	}
-
-		ul.actions li:first-child {
-			margin-left: 0;
-		}
-
-	ul.special {
-		cursor: default;
+	
+	li  {
+	 list-style-position:outside;
 	}
 
 		ul.special li {
@@ -1080,15 +1062,6 @@
 				color: #fff;
 				text-align: center;
 			}
-
-	ol.default {
-		list-style: decimal;
-		padding-left: 1.25em;
-	}
-
-		ol.default li {
-			padding-left: 0.25em;
-		}
 
 /* Icons */
 
@@ -1520,17 +1493,6 @@
 			table.style1 {
 				overflow-x: scroll;
 			}
-
-		/* List */
-
-			ul.actions li {
-				display: block;
-				margin: 0.5em 0 0 0;
-			}
-
-				ul.actions li:first-child {
-					margin-top: 0;
-				}
 
 		/* Button */
 
