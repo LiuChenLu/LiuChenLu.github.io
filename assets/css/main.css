@@ -907,6 +907,10 @@
 
 /* Image */
 
+	img {
+		width:85%;
+	}
+
 	.image {
 		display: inline-block;
 	}
@@ -1198,9 +1202,14 @@
 				letter-spacing: -0.015em;
 			}
 
-			h3, h4, h5, h6 {
+			h3, h4 {
 				font-size: 1.25em;
 				letter-spacing: -0.015em;
+			}
+
+			h5, h6 {
+				font-size: 1em;
+				font-style: italic;
 			}
 
 		/* Section/Article */
