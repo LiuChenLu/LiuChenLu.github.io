@@ -907,8 +907,8 @@
 
 /* Image */
 
-	img {
-		width:85%;
+	.design img {
+		width: 85%;
 	}
 
 	.image {
@@ -1116,6 +1116,7 @@
 /* Me */
 
 	#me .pic {
+		width: auto;
 		position: relative;
 		display: block;
 	}
