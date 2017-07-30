@@ -1009,9 +1009,19 @@
 /* Box */
 	.box.contact {
 		text-align: center;
+		line-height: 2em;
+	}
+	.box.contact ul {
+		line-height: 3em;
 	}
 
 /* List */
+
+	.spaced {
+		line-height: 1.5em;
+		margin-top: 1em;
+		margin-bottom: 1em;
+	}
 
 	ul, ol  {
 	 padding-left: 30px;
