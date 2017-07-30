@@ -1015,6 +1015,7 @@
 
 	ul, ol  {
 	 padding-left: 30px;
+	 line-height: 1em;
 	}
 	
 	li  {
@@ -1193,7 +1194,13 @@
 				line-height: 1.75em;
 			}
 
+			underimagetext {
+				font-style: italic;
+				line-height: 1em;
+			}
+
 			h1 {
+				line-height: 2.4em;
 				font-size: 2.4em;
 				letter-spacing: -0.015em;
 			}
@@ -1204,6 +1211,7 @@
 			}
 
 			h3, h4 {
+				margin-top: 1.25em;
 				font-size: 1.25em;
 				letter-spacing: -0.015em;
 			}
