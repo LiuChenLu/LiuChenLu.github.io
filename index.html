@@ -25,6 +25,7 @@
 						<a href="#resume" class="icon fa-briefcase"><span>Resume</span></a>
 						<a href="#contact" class="icon fa-envelope"><span>Contact</span></a>
 						<a href="#plantiles" class="icon fa-leaf"><span>Plantiles</span></a>
+						<a href="#art" class="icon fa-paint-brush"><span>Art Projects</span></a>
 					</nav>
 
 				<!-- Main -->
@@ -82,7 +83,7 @@
 									</div>
 								</section>
 							</article>
-						<!-- Mellona -->
+						<!-- Plantile -->
 							<article id="plantiles" class="panel">
 								<header>
 									<h2>Plantile</h2>
@@ -151,6 +152,26 @@
 									<p>If you like the idea, let's <a href="#contact" class="jumplink">get in touch</a>! I'd love to hear your thoughts, both positive and critical, on the design and the presentation. If you'd like to help, I need alpha testers, helping hands in the Boston area, and connection to architects/builders who can tell me about the static load's effect on the roof. </p>
 									<p>Together, we can terraform suburban roofs and restore the natural environment.</p>
 							</article>
+						<!-- Art Projects -->
+							<article id="art" class="panel">
+								<header><h2>Art Projects</h2></head>
+								<h3>Programming</h3>
+								  <iframe width="560" height="315" src="https://www.youtube.com/embed/H5civU0ylfQ" frameborder="0" allowfullscreen></iframe>
+								<h3>Drawing</h3>
+								  	<div style="margin: auto">
+								  		<button onclick="plusDivs(-1,'Drawing')">❮ Prev</button>
+								  		<button onclick="plusDivs(1,'Drawing')">Next ❯</button>
+								  	</div>
+								  	<img class="Drawing" src="images/ArtProjects/WatercolourTaniwa.jpg" width="90%">
+								  	<img class="Drawing" src="images/ArtProjects/PenRobby.jpg" width="90%">
+								<h3>Cooking</h3>
+							  		<div style="margin: auto">
+							  			<button onclick="plusDivs(-1,'Cooking')">❮ Prev</button>
+							  			<button onclick="plusDivs(1,'Cooking')">Next ❯</button>
+							  		</div>
+							  		<img class="Cooking" src="images/ArtProjects/VeganVermicelli.jpg" width="90%">
+							  		<img class="Cooking" src="images/ArtProjects/LobsterStuffedMushrooms.jpg" width="90%">
+							</article>
 
 					</div>
 
@@ -170,6 +191,29 @@
 			<script src="assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
+			<script>
+				var slideNameToIndex = {};
+				slideNameToIndex['Drawing'] = 1;
+				slideNameToIndex['Cooking'] = 1;
 
+				for(key in slideNameToIndex){
+					showDivs(slideNameToIndex[key],key);
+				}
+
+				function plusDivs(n,slideshow) {
+					showDivs(slideNameToIndex[slideshow] += n,slideshow);
+				}
+
+				function showDivs(n, slideshow) {
+					var i;
+					var x = document.getElementsByClassName(slideshow);
+					if (n > x.length) {slideNameToIndex[slideshow] = 1}    
+					if (n < 1) {slideNameToIndex[slideshow] = x.length}
+					for (i = 0; i < x.length; i++) {
+						x[i].style.display = "none";  
+					}
+					x[slideNameToIndex[slideshow]-1].style.display = "block";  
+				}
+			</script>
 	</body>
 </html>
