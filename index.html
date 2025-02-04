@@ -5,8 +5,6 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-<link rel="stylesheet" href="assets/css/lite-youtube-embed/src/lite-yt-embed.css" />
-<script src="assets/js/lite-yt-embed.js"></script>
 
 	<head>
 		<title>Liu Lu</title>
@@ -37,7 +35,6 @@
 						<a href="#me" class="icon fa-home active"><span>Home</span></a>
 						<a href="#resume" class="icon fa-briefcase"><span>Resume</span></a>
 						<a href="#relate" class="icon fa-cutlery"><span>relATE</span></a>
-						<a href="#art" class="icon fa-paint-brush"><span>Personal</span></a>
 					</nav>
 
 				<!-- Main -->
@@ -98,40 +95,6 @@
 								  	<img class="PitchDeck" src="images/pitch_deck/deck11.jpg" width="90%">
 								  	<a href="https://docs.google.com/forms/d/e/1FAIpQLSe5UYpNudJjhUzCpeSt7_UUfTVjCg1gR-alz5GBts8tQhFflg"><button>Sign Up to relATE</button></a> <div>
 							</article>
-						<!-- Art Projects -->
-							<article id="art" class="panel">
-								<header><h2>Art Projects</h2></head>
-								<h3>Programming</h3>
-								  <lite-youtube videoid="H5civU0ylfQ" playlabel="Play demo video: Evolutionary Boids in Haskell"></lite-youtube>
-								<h3>Folk art bureau</h3>
-								  	<div style="margin: auto">
-								  		<button onclick="plusDivs(-1,'Bureau')">❮ Prev</button>
-								  		<button onclick="plusDivs(1,'Bureau')">Next ❯</button>
-								  	</div>
-								  	<img class="Bureau" src="images/ArtProjects/drawer1.jpg" width="90%">
-								  	<img class="Bureau" src="images/ArtProjects/drawer2.jpg" width="90%">
-								  	<img class="Bureau" src="images/ArtProjects/drawer3.jpg" width="90%">
-								  	<img class="Bureau" src="images/ArtProjects/drawer4.jpg" width="90%">
-								  	<img class="Bureau" src="images/ArtProjects/drawer5.jpg" width="90%">
-								  	<img class="Bureau" src="images/ArtProjects/drawer6.jpg" width="90%">
-								  	<img class="Bureau" src="images/ArtProjects/drawer7.jpg" width="90%">
-								<h3>Drawing</h3>
-								  	<div style="margin: auto">
-								  		<button onclick="plusDivs(-1,'Drawing')">❮ Prev</button>
-								  		<button onclick="plusDivs(1,'Drawing')">Next ❯</button>
-								  	</div>
-								  	<img class="Drawing" src="images/ArtProjects/hammy.jpg" width="90%">
-								  	<img class="Drawing" src="images/ArtProjects/WatercolourTaniwa.jpg" width="90%">
-								  	<img class="Drawing" src="images/ArtProjects/PenRobby.jpg" width="90%">
-								<h3>Cooking</h3>
-							  		<div style="margin: auto">
-							  			<button onclick="plusDivs(-1,'Cooking')">❮ Prev</button>
-							  			<button onclick="plusDivs(1,'Cooking')">Next ❯</button>
-							  		</div>
-							  		<img class="Cooking" src="images/ArtProjects/curry.jpg" width="90%">
-							  		<img class="Cooking" src="images/ArtProjects/VeganVermicelli.jpg" width="90%">
-							  		<img class="Cooking" src="images/ArtProjects/LobsterStuffedMushrooms.jpg" width="90%">
-							</article>
 
 					</div>
 
@@ -151,31 +114,5 @@
 			<script src="assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
-			<script>
-				var slideNameToIndex = {};
-				slideNameToIndex['Bureau'] = 1;
-				slideNameToIndex['Drawing'] = 1;
-				slideNameToIndex['Cooking'] = 1;
-				slideNameToIndex['PlantileDesign'] = 1;
-
-				for(key in slideNameToIndex){
-					showDivs(slideNameToIndex[key],key);
-				}
-
-				function plusDivs(n,slideshow) {
-					showDivs(slideNameToIndex[slideshow] += n,slideshow);
-				}
-
-				function showDivs(n, slideshow) {
-					var i;
-					var x = document.getElementsByClassName(slideshow);
-					if (n > x.length) {slideNameToIndex[slideshow] = 1}    
-					if (n < 1) {slideNameToIndex[slideshow] = x.length}
-					for (i = 0; i < x.length; i++) {
-						x[i].style.display = "none";  
-					}
-					x[slideNameToIndex[slideshow]-1].style.display = "block";  
-				}
-			</script>
 	</body>
 </html>
